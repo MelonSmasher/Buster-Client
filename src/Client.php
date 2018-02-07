@@ -35,7 +35,7 @@ class Client
      */
     public function __construct($key, $host, $port = 80, $useHttps = false)
     {
-        $this->url = implode('', [($useHttps) ? 'https' : 'http', '://', $host, ':', strval($port), '/api/bust']);
+        $this->url = implode('', [($useHttps) ? 'https' : 'http', '://', $host, ':', strval($port), '/api/']);
         $this->headers = ['x-authorization' => $key, 'Accept' => '*/*', 'Cache-Control' => 'no-cache'];
         $this->httpClient = new HttpClient();
     }
@@ -50,7 +50,7 @@ class Client
     {
         $response = $this->httpClient->request(
             'POST',
-            $this->url,
+            $this->url . 'bust',
             [
                 'debug' => false,
                 'http_errors' => false,
@@ -60,6 +60,26 @@ class Client
                     'scheme_id' => $schemeId,
                     'client_username' => $clientUserName
                 ]
+            ]
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param int $schemeId
+     * @param int $page
+     * @return \GuzzleHttp\Message\Response
+     */
+    public function history($schemeId, $page = 1)
+    {
+        $response = $this->httpClient->request(
+            'GET',
+            $this->url . 'history/' . $schemeId . '?page=' . $page,
+            [
+                'debug' => false,
+                'http_errors' => false,
+                'headers' => $this->headers,
             ]
         );
 
