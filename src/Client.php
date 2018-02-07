@@ -11,10 +11,19 @@ use GuzzleHttp\Client as HttpClient;
 class Client
 {
 
+    /**
+     * @var array
+     */
     protected $headers = [];
 
+    /**
+     * @var \GuzzleHttp\Client
+     */
     protected $httpClient;
 
+    /**
+     * @var string
+     */
     protected $url = '';
 
     /**
