@@ -1,0 +1,42 @@
+{
+  "name": "melonsmasher/buster-client",
+  "description": "Buster client library for php.",
+  "keywords": [
+    "buster",
+    "nginx",
+    "cache",
+    "fastcgi",
+    "proxy",
+    "client"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Markessinis",
+      "email": "markea125@gmail.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MelonSmasher/Buster-Client/issues",
+    "source": "https://github.com/MelonSmasher/Buster-Client"
+  },
+  "type": "library",
+  "require": {
+    "php": ">=5.4.0",
+    "guzzlehttp/guzzle": "~4.0"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Buster\\": "src/"
+    }
+  },
+  "scripts": {
+  },
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
