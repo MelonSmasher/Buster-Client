@@ -6,6 +6,8 @@
  * Time: 11:30 PM
  */
 
+namespace Buster;
+
 use GuzzleHttp\Client as HttpClient;
 
 class Client
