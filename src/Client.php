@@ -8,25 +8,12 @@
 
 namespace Buster;
 
-use GuzzleHttp\Client as HttpClient;
-
 class Client
 {
-
-    /**
-     * @var array
-     */
-    protected $headers = [];
-
     /**
      * @var \GuzzleHttp\Client
      */
     protected $httpClient;
-
-    /**
-     * @var string
-     */
-    protected $url = '';
 
     /**
      * BusterClient constructor.
@@ -37,26 +24,28 @@ class Client
      */
     public function __construct($key, $host, $port = 80, $useHttps = false)
     {
-        $this->url = implode('', [($useHttps) ? 'https' : 'http', '://', $host, ':', strval($port), '/api/']);
-        $this->headers = ['x-authorization' => $key, 'Accept' => '*/*', 'Cache-Control' => 'no-cache'];
-        $this->httpClient = new HttpClient();
+        $url = implode('', [($useHttps) ? 'https' : 'http', '://', $host, ':', strval($port), '/api/']);
+        $headers = ['x-authorization' => $key, 'Accept' => '*/json', 'Cache-Control' => 'no-cache'];
+        $this->httpClient = new \GuzzleHttp\Client([
+            'base_uri' => $url,
+            'debug' => false,
+            'http_errors' => false,
+            'headers' => $headers
+        ]);
     }
 
     /**
      * @param $pathToPurge
      * @param $schemeId
      * @param string $clientUserName
-     * @return \GuzzleHttp\Message\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function bust($pathToPurge, $schemeId, $clientUserName = '')
     {
         $response = $this->httpClient->request(
             'POST',
-            $this->url . 'bust',
+            'bust',
             [
-                'debug' => false,
-                'http_errors' => false,
-                'headers' => $this->headers,
                 'form_params' => [
                     'path' => $pathToPurge,
                     'scheme_id' => $schemeId,
@@ -64,28 +53,20 @@ class Client
                 ]
             ]
         );
-
         return $response;
     }
 
     /**
      * @param int $schemeId
      * @param int $page
-     * @return \GuzzleHttp\Message\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function history($schemeId, $page = 1)
     {
         $response = $this->httpClient->request(
             'GET',
-            $this->url . 'history/' . $schemeId . '?page=' . $page,
-            [
-                'debug' => false,
-                'http_errors' => false,
-                'headers' => $this->headers,
-            ]
+            implode(['history/', strval($schemeId), '?page=', strval($page)])
         );
-
         return $response;
     }
-
 }
