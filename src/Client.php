@@ -54,6 +54,7 @@ class Client
             [
                 'debug' => false,
                 'http_errors' => false,
+                'headers' => $this->headers,
                 'form_params' => [
                     'path' => $pathToPurge,
                     'scheme_id' => $schemeId,
