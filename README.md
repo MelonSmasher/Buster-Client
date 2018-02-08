@@ -30,15 +30,17 @@ class SomeClass
         $apiPort = 443;
         $useHttps = true;
         
-        $pathToPuge = '/about';
+        $pathToPuge = '/about/';
         $schemeId = 1;
         $clientUserName = 'WordPressAdmin';
         
         // Create the client
         $buster = new Client($apiKey, $apiHost, $apiPort, $useHttps);
-        // Purge a page from the cache(s)
+        // Purge a page from the cache(s) using the scheme ID
         $buster->bust($pathToPuge, $schemeId, $clientUserName);
-        
+        // Retrieve the purge history of scheme 1
+        $page = 1;
+        $buster->history($schemeId, $page);
     }
 }
 ```
@@ -48,5 +50,5 @@ class SomeClass
 Some cool projects that this software relies on.
 
 * [guzzle/guzzle](https://github.com/guzzle/guzzle)
-* [MelonSmasher/Buster-Client](https://github.com/MelonSmasher/Buster-Client)
+* [MelonSmasher/Buster-WP](https://github.com/MelonSmasher/Buster-WP)
 * [MelonSmasher/Buster](https://github.com/MelonSmasher/Buster)
