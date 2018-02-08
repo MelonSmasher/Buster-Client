@@ -42,3 +42,11 @@ class SomeClass
     }
 }
 ```
+
+## Related Projects
+
+Some cool projects that this software relies on.
+
+* [guzzle/guzzle](https://github.com/guzzle/guzzle)
+* [MelonSmasher/Buster-Client](https://github.com/MelonSmasher/Buster-Client)
+* [MelonSmasher/Buster](https://github.com/MelonSmasher/Buster)
