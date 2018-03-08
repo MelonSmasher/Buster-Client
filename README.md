@@ -38,6 +38,8 @@ class SomeClass
         $buster = new Client($apiKey, $apiHost, $apiPort, $useHttps);
         // Purge a page from the cache(s) using the scheme ID
         $buster->bust($pathToPuge, $schemeId, $clientUserName);
+        // Purge all pages from the cache(s) using the scheme ID
+        $buster->bustAll($schemeId, $clientUserName);
         // Retrieve the purge history of scheme 1
         $page = 1;
         $buster->history($schemeId, $page);

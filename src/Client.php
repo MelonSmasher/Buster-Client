@@ -57,6 +57,27 @@ class Client
     }
 
     /**
+     * @param $schemeId
+     * @param string $clientUserName
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function bustAll($schemeId, $clientUserName = '')
+    {
+        $response = $this->httpClient->request(
+            'POST',
+            'bust',
+            [
+                'form_params' => [
+                    'path' => '/*',
+                    'scheme_id' => $schemeId,
+                    'client_username' => $clientUserName
+                ]
+            ]
+        );
+        return $response;
+    }
+
+    /**
      * @param int $schemeId
      * @param int $page
      * @return \Psr\Http\Message\ResponseInterface
